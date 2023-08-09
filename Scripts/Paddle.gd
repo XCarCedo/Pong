@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name Paddle
 
 enum PaddleSide{
 	player1,
