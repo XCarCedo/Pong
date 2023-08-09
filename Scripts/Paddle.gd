@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StaticBody2D
 
 enum PaddleSide{
 	player1,
@@ -7,7 +7,7 @@ enum PaddleSide{
 
 @export var win_area: Area2D
 @export var paddle_side: PaddleSide = PaddleSide.player1
-@export var speed:int = 400
+@export var speed:int = 10
 var score: int = 0
 var paddle_textures: Dictionary = {
 	PaddleSide.player1:preload("res://Assets/Game/paddleBlue.png"),
@@ -22,17 +22,15 @@ func _ready():
 func _physics_process(delta):
 	if paddle_side == PaddleSide.player1:
 		if Input.get_action_strength("p1_up"):
-			velocity.y -= speed
+			position.y -= speed
 		elif Input.get_action_strength("p1_down"):
-			velocity.y += speed
+			position.y += speed
 	elif paddle_side == PaddleSide.player2:
 		if Input.get_action_strength("p2_up"):
-			velocity.y -= speed
+			position.y -= speed
 		elif Input.get_action_strength("p2_down"):
-			velocity.y += speed
+			position.y += speed
 	
-	move_and_slide()
-	velocity.y = 0
 
 func _on_body_entered_win_area(body: PhysicsBody2D):
 	if body.name.to_lower() == "ball":
