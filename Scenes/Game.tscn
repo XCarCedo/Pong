@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://vc5bkgxjpb42"]
+[gd_scene load_steps=4 format=3 uid="uid://vc5bkgxjpb42"]
 
 [ext_resource type="PackedScene" uid="uid://n0utc0vohpuc" path="res://Scenes/Paddle.tscn" id="1_bn122"]
 [ext_resource type="PackedScene" uid="uid://c8x78r5awkdia" path="res://Scenes/Ball.tscn" id="2_isbn1"]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3g38a"]
+a = Vector2(1152, 0)
+b = Vector2(0, 0)
+
 [node name="Game" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.0431373, 0.101961, 1)
 
 [node name="P1Paddle" parent="." instance=ExtResource("1_bn122")]
 position = Vector2(40, 324)
@@ -13,3 +28,16 @@ position = Vector2(1112, 324)
 paddle_side = 1
 
 [node name="Ball" parent="." instance=ExtResource("2_isbn1")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Up" type="StaticBody2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Up"]
+shape = SubResource("SegmentShape2D_3g38a")
+
+[node name="Down" type="StaticBody2D" parent="Node2D"]
+position = Vector2(0, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Down"]
+shape = SubResource("SegmentShape2D_3g38a")
