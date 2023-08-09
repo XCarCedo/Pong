@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8x78r5awkdia"]
+[gd_scene load_steps=5 format=3 uid="uid://c8x78r5awkdia"]
 
+[ext_resource type="Script" path="res://Scripts/Ball.gd" id="1_6jawv"]
 [ext_resource type="Texture2D" uid="uid://d1r81mtpinea5" path="res://Assets/Game/ballBlue.png" id="1_eog86"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_soq08"]
@@ -12,6 +13,7 @@ radius = 12.0
 [node name="Ball" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_soq08")
 gravity_scale = 0.0
+script = ExtResource("1_6jawv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_eog86")
