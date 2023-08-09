@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://vc5bkgxjpb42"]
+[gd_scene load_steps=5 format=3 uid="uid://vc5bkgxjpb42"]
 
 [ext_resource type="PackedScene" uid="uid://n0utc0vohpuc" path="res://Scenes/Paddle.tscn" id="1_bn122"]
 [ext_resource type="PackedScene" uid="uid://c8x78r5awkdia" path="res://Scenes/Ball.tscn" id="2_isbn1"]
@@ -6,6 +6,9 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3g38a"]
 a = Vector2(1152, 0)
 b = Vector2(0, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v2qs5"]
+b = Vector2(0, 648)
 
 [node name="Game" type="Node2D"]
 
@@ -20,24 +23,39 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.0431373, 0.101961, 1)
 
-[node name="P1Paddle" parent="." instance=ExtResource("1_bn122")]
+[node name="P1Paddle" parent="." node_paths=PackedStringArray("win_area") instance=ExtResource("1_bn122")]
 position = Vector2(40, 324)
+win_area = NodePath("../WinAreas/RightWinArea")
 
-[node name="P2Paddle" parent="." instance=ExtResource("1_bn122")]
+[node name="P2Paddle" parent="." node_paths=PackedStringArray("win_area") instance=ExtResource("1_bn122")]
 position = Vector2(1112, 324)
+win_area = NodePath("../WinAreas/LeftWinArea")
 paddle_side = 1
 
 [node name="Ball" parent="." instance=ExtResource("2_isbn1")]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Boundries" type="Node2D" parent="."]
 
-[node name="Up" type="StaticBody2D" parent="Node2D"]
+[node name="Up" type="StaticBody2D" parent="Boundries"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Up"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundries/Up"]
 shape = SubResource("SegmentShape2D_3g38a")
 
-[node name="Down" type="StaticBody2D" parent="Node2D"]
+[node name="Down" type="StaticBody2D" parent="Boundries"]
 position = Vector2(0, 648)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Down"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundries/Down"]
 shape = SubResource("SegmentShape2D_3g38a")
+
+[node name="WinAreas" type="Node2D" parent="."]
+
+[node name="RightWinArea" type="Area2D" parent="WinAreas"]
+position = Vector2(1152, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinAreas/RightWinArea"]
+shape = SubResource("SegmentShape2D_v2qs5")
+
+[node name="LeftWinArea" type="Area2D" parent="WinAreas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinAreas/LeftWinArea"]
+shape = SubResource("SegmentShape2D_v2qs5")
