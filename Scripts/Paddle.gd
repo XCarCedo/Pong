@@ -5,14 +5,17 @@ enum PaddleSide{
 	player2,
 }
 
+@export var win_area: Area2D
 @export var paddle_side: PaddleSide = PaddleSide.player1
 @export var speed:int = 400
+var score: int = 0
 var paddle_textures: Dictionary = {
 	PaddleSide.player1:preload("res://Assets/Game/paddleBlue.png"),
 	PaddleSide.player2:preload("res://Assets/Game/paddleRed.png"),
 }
 
 func _ready():
+	win_area.connect("body_entered", _on_body_entered_win_area)
 	$Sprite2D.set_texture(paddle_textures[paddle_side])
 
 func _physics_process(delta):
@@ -29,3 +32,8 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	velocity.y = 0
+
+func _on_body_entered_win_area(body: PhysicsBody2D):
+	if body.name.to_lower() == "ball":
+		score += 1
+		body.reset_stats()
