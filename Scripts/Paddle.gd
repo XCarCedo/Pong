@@ -15,7 +15,8 @@ var paddle_textures: Dictionary = {
 }
 
 func _ready():
-	win_area.connect("body_entered", _on_body_entered_win_area)
+	if win_area:
+		win_area.connect("body_entered", _on_body_entered_win_area)
 	$Sprite2D.set_texture(paddle_textures[paddle_side])
 
 func _physics_process(delta):
