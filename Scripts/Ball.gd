@@ -21,9 +21,7 @@ func shoot():
 	randomize()
 	shooted = true
 	
-	var new_vel = Vector2(speed,0)
-	new_vel = new_vel.rotated(deg_to_rad(randf_range(0,360)))
-	linear_velocity = new_vel
+	linear_velocity = Vector2([speed, -speed].pick_random(), 0)
 
 
 func _physics_process(delta):
