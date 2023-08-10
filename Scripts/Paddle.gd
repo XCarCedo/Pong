@@ -33,6 +33,10 @@ func _physics_process(delta):
 		elif Input.get_action_strength("p2_down"):
 			position.y += speed
 	
+	if global_position.y < 0:
+		global_position.y = 0
+	elif global_position.y > get_viewport_rect().size.y:
+		global_position.y = get_viewport_rect().size.y
 
 func _on_body_exited_win_area(body: PhysicsBody2D):
 	if "ball" in body.get_groups():
