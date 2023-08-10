@@ -11,7 +11,7 @@ b = Vector2(0, 0)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_v2qs5"]
 b = Vector2(0, 648)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=["game"]]
 metadata/_edit_horizontal_guides_ = []
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
