@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://n0utc0vohpuc"]
+[gd_scene load_steps=3 format=3 uid="uid://n0utc0vohpuc"]
 
 [ext_resource type="Texture2D" uid="uid://ddtim4s3oa8vu" path="res://Assets/Game/paddleBlue.png" id="1_02faf"]
 [ext_resource type="Script" path="res://Scripts/Paddle.gd" id="1_ndgc7"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tjsmh"]
-radius = 12.0
-height = 104.0
 
 [node name="Paddle" type="StaticBody2D" groups=["paddle"]]
 script = ExtResource("1_ndgc7")
@@ -14,5 +10,5 @@ script = ExtResource("1_ndgc7")
 rotation = 1.5708
 texture = ExtResource("1_02faf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_tjsmh")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(4, -52, 11, -46, 8, -39, 15, 0, 7, 40, 9, 48, 4, 52, -5, 52, -9, 49, -7, 40, -15, 0, -9, -39, -11, -46, -5, -52)
