@@ -14,10 +14,11 @@ var paddle_textures: Dictionary = {
 	PaddleSide.player1:preload("res://Assets/Game/paddleBlue.png"),
 	PaddleSide.player2:preload("res://Assets/Game/paddleRed.png"),
 }
+var ball_scene: PackedScene = load("res://Scenes/Ball.tscn")
 
 func _ready():
 	if win_area:
-		win_area.connect("body_entered", _on_body_entered_win_area)
+		win_area.connect("body_exited", _on_body_exited_win_area)
 	$Sprite2D.set_texture(paddle_textures[paddle_side])
 
 func _physics_process(delta):
@@ -33,7 +34,9 @@ func _physics_process(delta):
 			position.y += speed
 	
 
-func _on_body_entered_win_area(body: PhysicsBody2D):
-	if body.name.to_lower() == "ball":
+func _on_body_exited_win_area(body: PhysicsBody2D):
+	if "ball" in body.get_groups():
 		score += 1
-		body.reset_stats()
+		body.queue_free()
+		var ball_ins = ball_scene.instantiate()
+		get_tree().get_first_node_in_group("game").call_deferred("add_child", ball_ins)
